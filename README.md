@@ -1,7 +1,13 @@
 # tera-ranger-one-lib
-A C++ library for reading the Tera Ranger One sensor from http://www.teraranger.com/
+A C++ library for reading the Tera Ranger One sensor over a USB connection.
+
+Sensor is available from http://www.teraranger.com/
 
 There are 2 files for test: 
+
+- tera_ranger_one_continuous.cpp - for continuous data read,
+and
+- tera_ranger_one_on_request.cpp - for reading data on request - this is useful if you want to create a LIDAR and you read data only after a motor step has been performed.
 
 # Usage
 
