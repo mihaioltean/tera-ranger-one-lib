@@ -1,3 +1,5 @@
+// MIT License
+// contact: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
 //---------------------------------------------------------------------------
 
 #ifndef lista_cut1dxH

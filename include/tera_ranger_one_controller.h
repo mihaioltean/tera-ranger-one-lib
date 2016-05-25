@@ -1,3 +1,6 @@
+// MIT License
+// contact: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+
 #ifndef tera_ranger_one_H
 #define tera_ranger_one_H
 

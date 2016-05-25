@@ -1,3 +1,6 @@
+// author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// MIT License
+//--------------------------------------------------------------
 
 #include "tera_ranger_one_controller.h"
 

@@ -1,3 +1,5 @@
+// contact: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// MIT License
 // ---------------------------------------------------------------------------
 
 #include "../include/lista_voidp.h"
