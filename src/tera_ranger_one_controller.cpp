@@ -15,7 +15,7 @@
 //--------------------------------------------------------------
 t_teraranger_one_controller::t_teraranger_one_controller(void)
 {
-	strcpy(version, "2016.05.24.0"); // year.month.day.build number
+	strcpy(version, "2016.05.28.0"); // year.month.day.build number
 	current_buffer[0] = 0;
 
 	sensor_state = COMMAND_DONE;
@@ -53,10 +53,12 @@ int t_teraranger_one_controller::parse_and_queue_commands(char* tmp_str, int str
 	while (i < str_length) {
 		// can be more than 1 command in a string, so I have to check again for a letter
 		if (tmp_str[i] == 'T' && i + 3 <= str_length) {
-			int *distance = new int;
-			*distance = tmp_str[i + 1] * 255 + tmp_str[i + 2];
-			if (*distance >= 200 && *distance <= 14000)
-  			  received_distances.Add(distance);
+			int distance = tmp_str[i + 1] * 255 + tmp_str[i + 2];
+			if (distance >= 200 && distance <= 14000) {
+				int *p_distance = new int;
+				*p_distance = distance;
+				received_distances.Add(p_distance);
+			}
 			i += 4;
 		}
 		else
