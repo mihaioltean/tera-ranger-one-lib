@@ -1,5 +1,7 @@
+// author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// More info: https://github.com/mihaioltean/tera-ranger-one-lib
 // MIT License
-// contact: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+//---------------------------------------------------------------
 
 #ifndef tera_ranger_one_H
 #define tera_ranger_one_H
@@ -62,7 +64,16 @@ public:
 	// query for distance
 	bool query_for_distance(int & distance);
 
+	// return the state of the sensor
+	// could be:
+	// COMMAND_SENT if a request for distance has been sent
+	// COMMAND_DONE if the sensor has responded with the distance
 	int get_state(void);
+
+	// set the state of the sensor
+	// could be:
+	// COMMAND_SENT if a request for distance has been sent
+	// COMMAND_DONE if the sensor has responded with the distance
 	void set_state(int new_state);
 };
 

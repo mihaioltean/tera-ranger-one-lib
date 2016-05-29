@@ -1,6 +1,7 @@
 // author: Mihai Oltean, www.tcreate.org, mihai.oltean@gmail.com
+// More info: https://github.com/mihaioltean/tera-ranger-one-lib
 // MIT License
-//--------------------------------------------------------------
+//---------------------------------------------------------------
 
 #include "tera_ranger_one_controller.h"
 
@@ -77,16 +78,16 @@ static const uint8_t crc_table[] = {
 //--------------------------------------------------------------
 uint8_t crc8(uint8_t *p, uint8_t len)
 {
-// Taken from Arduino Example from Terabee
-		uint16_t i;
-		uint16_t crc = 0x0;
+	// Taken from Arduino Example from Terabee
+	uint16_t i;
+	uint16_t crc = 0x0;
 
-		while (len--) {
-				i = (crc ^ *p++) & 0xFF;
-				crc = (crc_table[i] ^ (crc << 8)) & 0xFF;
-		}
+	while (len--) {
+		i = (crc ^ *p++) & 0xFF;
+		crc = (crc_table[i] ^ (crc << 8)) & 0xFF;
+	}
 
-		return crc & 0xFF;
+	return crc & 0xFF;
 }
 //--------------------------------------------------------------
 int t_teraranger_one_controller::parse_and_queue_commands(unsigned char* tmp_str, int str_length)
@@ -95,18 +96,18 @@ int t_teraranger_one_controller::parse_and_queue_commands(unsigned char* tmp_str
 	while (i < str_length) {
 		// can be more than 1 command in a string, so I have to check again for a letter
 		if (tmp_str[i] == 'T' && i + 3 <= str_length) {
-		  uint8_t c8 = crc8(tmp_str + i, 3);
-		  if (c8 == tmp_str[i + 3]){
-			int distance = tmp_str[i + 1] * 255 + tmp_str[i + 2];
-			if (distance >= 200 && distance <= 14000) {
-				int *p_distance = new int;
-				*p_distance = distance;
-				received_distances.Add(p_distance);
+			uint8_t c8 = crc8(tmp_str + i, 3);
+			if (c8 == tmp_str[i + 3]) {
+				int distance = tmp_str[i + 1] * 255 + tmp_str[i + 2];
+				if (distance >= 200 && distance <= 14000) {
+					int *p_distance = new int;
+					*p_distance = distance;
+					received_distances.Add(p_distance);
+				}
+				i += 4;
 			}
-			i += 4;
-		  }
-		  else
-			 i++;
+			else
+				i++;
 		}
 		else
 			i++;
