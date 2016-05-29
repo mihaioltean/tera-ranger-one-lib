@@ -16,7 +16,7 @@
 //--------------------------------------------------------------
 t_teraranger_one_controller::t_teraranger_one_controller(void)
 {
-	strcpy(version, "2016.05.28.0"); // year.month.day.build number
+	strcpy(version, "2016.05.29.0"); // year.month.day.build number
 	current_buffer[0] = 0;
 
 	sensor_state = COMMAND_DONE;
@@ -104,9 +104,9 @@ int t_teraranger_one_controller::parse_and_queue_commands(unsigned char* tmp_str
 				received_distances.Add(p_distance);
 			}
 			i += 4;
-			}
-			else
-			  i++;
+		  }
+		  else
+			 i++;
 		}
 		else
 			i++;
@@ -117,21 +117,21 @@ int t_teraranger_one_controller::parse_and_queue_commands(unsigned char* tmp_str
 bool t_teraranger_one_controller::update_commands_from_serial(void)
 {
 	// the same code as in firmware
-	unsigned char tmp_buffer[4096];
-	int received_size = get_data_from_serial(tmp_buffer, 4096);
+	unsigned char tmp_buffer[10000];
+	int received_size = get_data_from_serial(tmp_buffer, 10000);
 	tmp_buffer[received_size] = 0;
 	if (received_size) {
-		strcpy(current_buffer + strlen(current_buffer), tmp_buffer);
+		strcpy((char*)current_buffer + strlen((char*)current_buffer), (char*)tmp_buffer);
 		//	printf("%s\n", current_buffer);
 
-		size_t buffer_length = strlen(current_buffer);
+		size_t buffer_length = strlen((char*)current_buffer);
 		for (size_t i = 0; i < buffer_length; i++)
 			if (current_buffer[i] == 'T') {// a distance
 				size_t j = buffer_length - 1;
 				if (j >= i + 3) {
 
 #ifdef DEBUG
-					usigned char tmp_str[100000];
+					usigned char tmp_str[10000];
 					strncpy(tmp_str, current_buffer + i, j - i);
 					tmp_str[j - i] = 0;
 					printf("current command is= %s", tmp_str);
@@ -140,7 +140,7 @@ bool t_teraranger_one_controller::update_commands_from_serial(void)
 					int new_index = parse_and_queue_commands(current_buffer + i, (int)(j - i + 1));
 
 					// remove the current executed command
-					strcpy(current_buffer, current_buffer + new_index);// not sure if this is good due to overlaps
+					strcpy((char*)current_buffer, (char*)current_buffer + new_index);// not sure if this is good due to overlaps
 
 #ifdef DEBUG
 					Serial.write("buffer left=");
@@ -177,8 +177,8 @@ void t_teraranger_one_controller::send_request_distance(void)
 	}
 
 	// must clear the serial
-	char tmp_buffer[4096];
-	int received_size = get_data_from_serial(tmp_buffer, 4096);
+	unsigned char tmp_buffer[10000];
+	int received_size = get_data_from_serial(tmp_buffer, 10000);
 }
 //--------------------------------------------------------------
 bool t_teraranger_one_controller::query_for_distance(int &distance)
