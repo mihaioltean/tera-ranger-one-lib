@@ -26,13 +26,13 @@ private:
 	int sensor_state;
 
 	// current buffer of characters received from sensor
-	char current_buffer[4096]; // I should not need so much
+	unsigned char current_buffer[1000000]; // I should not need so much
 
 	// a list with received events from sensor
 	TLista received_distances;
 
 	// parse the string for events
-	int parse_and_queue_commands(char* tmp_str, int str_length);
+	int parse_and_queue_commands(unsigned char* tmp_str, int str_length);
 
 public:
 	t_teraranger_one_controller(void);
@@ -54,7 +54,7 @@ public:
 	// gets an unformated string of chars from serial
 	// should be used only in extreme cases
 	// normally an application must call update_commands_from_serial
-	int get_data_from_serial(char *buffer, int buffer_size);
+	int get_data_from_serial(unsigned char *buffer, int buffer_size);
 
 	// send request
 	void send_request_distance(void);
