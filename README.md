@@ -27,3 +27,5 @@ Please send questions, comments etc. to mihai.oltean@gmail.com
 ## Screenshot
 
 ![tera ranger one usage screenshot](https://cloud.githubusercontent.com/assets/3392157/15533594/fc089dd6-226d-11e6-846c-3b0f44dd2f89.png)
+
+**Note**: If you need a program to read TeraRanger One from Arduino, you can find it here: [https://github.com/mihaioltean/TeraRangerOne_Arduino](https://github.com/mihaioltean/TeraRangerOne_Arduino)
